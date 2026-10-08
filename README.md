@@ -20,3 +20,7 @@ dart pub get
 jaspr serve        # mode pengembangan di http://localhost:8080
 jaspr build        # hasil statis di build/jaspr
 ```
+
+## Deploy
+Setiap push ke `main` otomatis di-build dan di-deploy ke GitHub Pages lewat `.github/workflows/deploy.yml`
+(aktifkan sekali di Settings → Pages → Source: **GitHub Actions**). Situs tayang di https://tegarispr.github.io/jaspr-portofolio/.

@@ -17,8 +17,8 @@ void main() {
     Document(
       title: '${Profile.name} · Portofolio',
       lang: 'id',
-      // Untuk GitHub Pages proyek (username.github.io/portfolio) build dengan
-      // --dart-define=BASE_PATH=/portfolio/
+      // Untuk GitHub Pages proyek (username.github.io/jaspr-portofolio) build dengan
+      // --dart-define=BASE_PATH=/jaspr-portofolio/
       base: const String.fromEnvironment('BASE_PATH', defaultValue: '/'),
       meta: {
         'description': '${Profile.name} — ${Profile.roles.first}. ${Profile.tagline}',
