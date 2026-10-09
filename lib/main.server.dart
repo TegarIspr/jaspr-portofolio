@@ -23,6 +23,7 @@ void main() {
       meta: {
         'description': '${Profile.name} — ${Profile.roles.first}. ${Profile.tagline}',
         'theme-color': '#0a0a12',
+        'color-scheme': 'dark light',
       },
       head: [
         link(rel: 'preconnect', href: 'https://fonts.googleapis.com'),
@@ -33,6 +34,12 @@ void main() {
               'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap',
         ),
         link(rel: 'stylesheet', href: 'styles.css'),
+        // Terapkan tema tersimpan sebelum halaman digambar, supaya tidak berkedip.
+        script(
+          content:
+              "try{document.documentElement.setAttribute('data-theme',"
+              "localStorage.getItem('theme')||'dark')}catch(e){}",
+        ),
         script(src: 'reveal.js', defer: true),
       ],
       body: App(),

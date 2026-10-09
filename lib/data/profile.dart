@@ -29,9 +29,9 @@ class Profile {
   ];
 
   static const stats = [
-    Stat('3+', 'Tahun pengalaman'),
-    Stat('20+', 'Proyek selesai'),
-    Stat('10+', 'Teknologi dikuasai'),
+    Stat(3, '+', 'Tahun pengalaman'),
+    Stat(20, '+', 'Proyek selesai'),
+    Stat(10, '+', 'Teknologi dikuasai'),
   ];
 
   static const skills = [
@@ -58,6 +58,15 @@ class Profile {
       icon: Icons.cart,
       repoUrl: 'https://github.com/TegarIspr',
       liveUrl: '#',
+      category: 'Mobile',
+      year: '2025',
+      details:
+          'Dibuat untuk UMKM yang butuh kasir sederhana tapi andal walau koneksi internet putus-sambung. Data disimpan lokal dulu lalu disinkronkan otomatis ke cloud.',
+      highlights: [
+        'Mode offline dengan sinkronisasi otomatis',
+        'Cetak struk lewat printer Bluetooth',
+        'Laporan penjualan harian dan mingguan',
+      ],
     ),
     Project(
       title: 'Portofolio Jaspr',
@@ -69,6 +78,15 @@ class Profile {
       icon: Icons.code,
       repoUrl: 'https://github.com/TegarIspr',
       liveUrl: '#',
+      category: 'Web',
+      year: '2026',
+      details:
+          'Website yang sedang kamu lihat. Dirender statis dengan Jaspr sehingga cepat dimuat, lalu bagian interaktifnya dihidrasi di browser.',
+      highlights: [
+        'Pre-render statis, ramah SEO',
+        'Komponen interaktif ditulis dengan Dart',
+        'Deploy otomatis ke GitHub Pages',
+      ],
     ),
     Project(
       title: 'Dashboard Analitik',
@@ -80,6 +98,15 @@ class Profile {
       icon: Icons.chart,
       repoUrl: 'https://github.com/TegarIspr',
       liveUrl: '#',
+      category: 'Web',
+      year: '2024',
+      details:
+          'Dashboard internal untuk tim bisnis memantau penjualan dan trafik secara real-time tanpa harus membuka spreadsheet.',
+      highlights: [
+        'Grafik interaktif dengan filter tanggal',
+        'Pembaruan data real-time',
+        'Ekspor laporan ke CSV dan PDF',
+      ],
     ),
     Project(
       title: 'Aplikasi Catatan Belajar',
@@ -91,6 +118,10 @@ class Profile {
       icon: Icons.book,
       repoUrl: 'https://github.com/TegarIspr',
       liveUrl: '#',
+      category: 'Mobile',
+      year: '2023',
+      details: 'Aplikasi catatan untuk pelajar dengan fokus pada kecepatan menulis dan mencari kembali catatan.',
+      highlights: ['Editor markdown dengan pratinjau', 'Tag dan pencarian instan', 'Mode gelap dan terang'],
     ),
   ];
 
@@ -123,8 +154,9 @@ class Profile {
 }
 
 class Stat {
-  const Stat(this.value, this.label);
-  final String value;
+  const Stat(this.value, this.suffix, this.label);
+  final int value;
+  final String suffix;
   final String label;
 }
 
@@ -135,6 +167,10 @@ class Project {
     required this.tags,
     required this.accent,
     required this.icon,
+    required this.category,
+    required this.year,
+    required this.details,
+    required this.highlights,
     this.repoUrl,
     this.liveUrl,
   });
@@ -144,6 +180,10 @@ class Project {
   final List<String> tags;
   final String accent;
   final String icon;
+  final String category;
+  final String year;
+  final String details;
+  final List<String> highlights;
   final String? repoUrl;
   final String? liveUrl;
 }
@@ -181,6 +221,15 @@ class Icons {
     '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
   );
   static final arrowRight = _svg('<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>');
+  static final close = _svg('<path d="M18 6 6 18"/><path d="m6 6 12 12"/>');
+  static final copy = _svg(
+    '<rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+  );
+  static final check = _svg('<path d="M20 6 9 17l-5-5"/>');
+  static final sun = _svg(
+    '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+  );
+  static final moon = _svg('<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>');
   static final mapPin = _svg(
     '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
   );

@@ -11,7 +11,9 @@ Semua teks (nama, peran, tentang, skill, proyek, pengalaman, kontak) ada di `lib
 - `lib/sections/sections.dart` – Hero, About, Projects, Experience, Contact, Footer
 - `lib/components/navbar.dart` – navbar + menu mobile (komponen `@client`)
 - `lib/components/typing_text.dart` – efek mengetik di hero (komponen `@client`)
-- `web/reveal.js` – animasi muncul saat menggulir
+- `lib/components/project_gallery.dart` – filter proyek + jendela detail (komponen `@client`)
+- `lib/components/contact_form.dart` – form kontak dengan validasi + salin email (komponen `@client`)
+- `web/reveal.js` – animasi muncul, penghitung angka, progress gulir, menu aktif, efek kartu
 
 ## Menjalankan
 ```bash
