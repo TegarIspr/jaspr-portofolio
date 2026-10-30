@@ -1,6 +1,8 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import '../components/contact_form.dart';
+import '../components/project_gallery.dart';
 import '../components/typing_text.dart';
 import '../data/profile.dart';
 
@@ -97,7 +99,11 @@ class AboutSection extends StatelessComponent {
           div(classes: 'about__stats reveal', [
             for (final stat in Profile.stats)
               div(classes: 'stat', [
-                span(classes: 'stat__value gradient-text', [.text(stat.value)]),
+                span(
+                  classes: 'stat__value gradient-text',
+                  attributes: {'data-count': '${stat.value}', 'data-suffix': stat.suffix},
+                  [.text('${stat.value}${stat.suffix}')],
+                ),
                 span(classes: 'stat__label', [.text(stat.label)]),
               ]),
           ]),
@@ -121,39 +127,7 @@ class ProjectsSection extends StatelessComponent {
     return section(id: 'projects', classes: 'section', [
       div(classes: 'container', [
         sectionHeading('02', 'Proyek', 'Karya pilihan'),
-        div(classes: 'projects', [
-          for (final project in Profile.projects)
-            article(classes: 'card card--${project.accent} reveal', [
-              div(classes: 'card__top', [
-                icon(Icons.byName(project.icon), classes: 'card__icon'),
-                div(classes: 'card__links', [
-                  if (project.repoUrl case final url?)
-                    a(
-                      href: url,
-                      target: Target.blank,
-                      attributes: {'aria-label': 'Kode sumber'},
-                      [
-                        icon(Icons.github),
-                      ],
-                    ),
-                  if (project.liveUrl case final url?)
-                    a(
-                      href: url,
-                      target: Target.blank,
-                      attributes: {'aria-label': 'Lihat demo'},
-                      [
-                        icon(Icons.external),
-                      ],
-                    ),
-                ]),
-              ]),
-              h3([.text(project.title)]),
-              p([.text(project.description)]),
-              ul(classes: 'card__tags', [
-                for (final tag in project.tags) li([.text(tag)]),
-              ]),
-            ]),
-        ]),
+        const ProjectGallery(),
       ]),
     ]);
   }
@@ -201,10 +175,7 @@ class ContactSection extends StatelessComponent {
               'Kirim pesan dan saya akan membalas secepatnya.',
             ),
           ]),
-          a(href: 'mailto:${Profile.email}', classes: 'btn btn--primary btn--large', [
-            icon(Icons.mail),
-            .text(Profile.email),
-          ]),
+          const ContactForm(),
           div(classes: 'contact__socials', [
             a(href: Profile.github, target: Target.blank, [icon(Icons.github), .text('GitHub')]),
             a(href: Profile.linkedin, target: Target.blank, [icon(Icons.linkedin), .text('LinkedIn')]),
