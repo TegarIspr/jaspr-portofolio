@@ -1,5 +1,5 @@
 // Interaksi kecil yang tidak perlu Dart: animasi muncul, penghitung angka,
-// progress gulir, menu aktif, dan efek sorot/miring pada kartu.
+// progress gulir, menu aktif, efek sorot kartu, dan ripple ala Material.
 (function () {
   var root = document.documentElement;
   root.classList.add('js');
@@ -61,20 +61,30 @@
   // Navbar dihidrasi oleh Jaspr setelah skrip ini; tandai ulang menu aktif sesudahnya.
   setTimeout(onScroll, 800);
 
-  // Efek sorot dan miring pada kartu (hanya perangkat dengan mouse).
+  // Ripple Material: lingkaran yang menyebar dari titik sentuh/klik.
+  var RIPPLE = '.btn, .filter, .chip, .card__more, .theme-toggle, .nav__toggle, .modal__close, .copy, .hero__socials a, .contact__socials a, .nav__links a, .fab';
+  if (!reduceMotion) document.addEventListener('pointerdown', function (e) {
+    var el = e.target.closest && e.target.closest(RIPPLE);
+    if (!el) return;
+    var r = el.getBoundingClientRect();
+    var size = Math.max(r.width, r.height) * 2.2;
+    var dot = document.createElement('span');
+    dot.className = 'ripple';
+    dot.style.width = dot.style.height = size + 'px';
+    dot.style.left = e.clientX - r.left - size / 2 + 'px';
+    dot.style.top = e.clientY - r.top - size / 2 + 'px';
+    el.appendChild(dot);
+    setTimeout(function () { dot.remove(); }, 600);
+  });
+
+  // Sorot lembut pada kartu proyek yang mengikuti kursor (hanya perangkat dengan mouse).
   if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
     document.addEventListener('pointermove', function (e) {
-      var card = e.target.closest && e.target.closest('.tilt');
+      var card = e.target.closest && e.target.closest('.card');
       if (!card) return;
       var r = card.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-      card.style.setProperty('--mx', x * 100 + '%');
-      card.style.setProperty('--my', y * 100 + '%');
-      card.style.transform = 'perspective(900px) rotateX(' + (0.5 - y) * 6 + 'deg) rotateY(' + (x - 0.5) * 6 + 'deg) translateY(-4px)';
-    });
-    document.addEventListener('pointerout', function (e) {
-      var card = e.target.closest && e.target.closest('.tilt');
-      if (card && !card.contains(e.relatedTarget)) card.style.transform = '';
+      card.style.setProperty('--mx', (e.clientX - r.left) / r.width * 100 + '%');
+      card.style.setProperty('--my', (e.clientY - r.top) / r.height * 100 + '%');
     });
 
     // Cahaya hero mengikuti kursor.

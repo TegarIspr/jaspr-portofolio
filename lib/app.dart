@@ -2,6 +2,7 @@ import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
 import 'components/navbar.dart';
+import 'data/profile.dart';
 import 'sections/sections.dart';
 
 /// Halaman utama portofolio. Dirender statis; komponen interaktif ([NavBar],
@@ -22,6 +23,16 @@ class App extends StatelessComponent {
         const ContactSection(),
       ]),
       const SiteFooter(),
+      // Floating action button (Material 3) menuju bagian kontak.
+      a(
+        href: '#contact',
+        classes: 'fab',
+        attributes: {'aria-label': 'Hubungi saya'},
+        [
+          span(classes: 'icon', [RawText(Icons.mail)]),
+          span(classes: 'fab__label', [.text('Hubungi')]),
+        ],
+      ),
     ]);
   }
 }

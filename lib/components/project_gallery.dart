@@ -72,6 +72,7 @@ class ProjectGalleryState extends State<ProjectGallery> {
               attributes: {'role': 'tab', 'aria-selected': '${c == _filter}'},
               onClick: () => setState(() => _filter = c),
               [
+                if (c == _filter) _icon(Icons.check),
                 .text(c),
                 span(classes: 'filter__count', [
                   .text(
@@ -86,7 +87,7 @@ class ProjectGalleryState extends State<ProjectGallery> {
         for (final project in visible)
           article(
             key: ValueKey(project.title),
-            classes: 'card card--${project.accent} tilt',
+            classes: 'card card--${project.accent}',
             [
               div(classes: 'card__top', [
                 _icon(Icons.byName(project.icon), classes: 'card__icon'),

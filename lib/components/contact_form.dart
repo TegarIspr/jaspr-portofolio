@@ -56,9 +56,11 @@ class ContactFormState extends State<ContactForm> {
 
   Component _field(String title, String? error, Component control) {
     final showError = _submitted && error != null;
+    // Text field bergaya Material 3 (outlined): label melayang di atas garis
+    // saat field difokus atau sudah berisi.
     return label(classes: 'field${showError ? ' field--error' : ''}', [
-      span(classes: 'field__label', [.text(title)]),
       control,
+      span(classes: 'field__label', [.text(title)]),
       if (showError) span(classes: 'field__error', [.text(error)]),
     ]);
   }
@@ -68,21 +70,21 @@ class ContactFormState extends State<ContactForm> {
     return div(classes: 'contact__box', [
       div(classes: 'contact__form', [
         _field(
-          'Nama',
+          'Nama kamu',
           _nameError,
           input<String>(
             type: InputType.text,
             value: _name,
-            attributes: {'placeholder': 'Nama kamu', 'autocomplete': 'name'},
+            attributes: {'placeholder': ' ', 'autocomplete': 'name'},
             onInput: (v) => setState(() => _name = v),
           ),
         ),
         _field(
-          'Pesan',
+          'Ceritakan ide atau proyekmu',
           _messageError,
           textarea(
             rows: 4,
-            placeholder: 'Ceritakan ide atau proyekmu…',
+            placeholder: ' ',
             onInput: (v) => setState(() => _message = v),
             [],
           ),
